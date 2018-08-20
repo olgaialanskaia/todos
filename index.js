@@ -154,36 +154,52 @@ function displayData() {
 
 // Define the addCheckboxStatus() function
 function addCheckboxStatus(e) {
-    e.preventDefault();
-    let transaction = db.transaction(['todos'], 'readwrite');
-    let objectStore = transaction.objectStore('todos');
-    let checkbox = e.target['checked'];
+  // Here we save the state of the checkbox for each item
+  // open a read/write db transaction, ready for adding the data
+  let transaction = db.transaction(['todos'], 'readwrite');
+
+  // call an object store that's already been added to the database
+  let objectStore = transaction.objectStore('todos');
+
+  // save a checkbox state of the element that triggered this event
+  let checkbox = e.target['checked'];
+  console.log("value:" + checkbox);
+
+  // access a table and column where you want to save an item checked status
+  let myIndex = objectStore.index('body');
+
+  // save the id of the element that triggered a click checkbox event
+  let idx = Number(e.target['id']);
+
+  // access an id of the item from db
+  let todoStatus = objectStore.get(idx);
+  console.log("my id:" + e.target['id']);
+
+  // upon getting an item id from db proceed with a db record update
+  todoStatus.onsuccess = function() {
+    // store an id of the item retrieved from db
+    let data = todoStatus.result;
+    console.log("Result:" + data);
+    console.log(todoStatus);
     console.log("value:" + checkbox);
-    let myIndex = objectStore.index('body');
-    let idx = Number(e.target['id']);
-    var todoStatus = objectStore.get(idx);
-    console.log("my id:" + e.target['id']);
 
-    todoStatus.onsuccess = function() {
-      let data = todoStatus.result;
-      console.log("Result:" + data);
-      console.log(todoStatus);
-      console.log("NULL: " + (data == null))
-      console.log("value:" + checkbox);
-      data['checked'] = checkbox;
+    // define the checkbox status of this item
+    data['checked'] = checkbox;
 
-      let request = objectStore.put(data);
-    };
+    // make a request to save the checkbox status
+    let request = objectStore.put(data);
+  };
 
-    transaction.oncomplete = function() {
-      console.log('Transaction completed: database modification finished.');
-    }
-
-    transaction.onerror = function() {
-      console.log('Transaction not opened due to error');
-
-    }
+  // Report on the success of the transaction completing, when everything is done
+  transaction.oncomplete = function() {
+    console.log('Transaction completed: database modification finished.');
   }
+
+  // Report on the failure of the transaction opening, when attempting to save the checkbox status
+  transaction.onerror = function() {
+    console.log('Transaction not opened due to error');
+  }
+}
 
 // Define the deleteItem() function
 function deleteItem(e) {
