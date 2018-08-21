@@ -102,7 +102,9 @@ function displayData() {
       // Create a p to put each data item inside when displaying it
       // structure the HTML fragment, and append it inside the list
       let listItem = document.createElement('li');
-      let para = document.createElement('p');
+      listItem.className = 'list-item';
+      let todoTextBox = document.createElement('span');
+      todoTextBox.className = 'check--label-text';
 
       // Create a checkbox and place it before each listItem
       let checkbox = document.createElement('input');
@@ -111,17 +113,26 @@ function displayData() {
       checkbox.type = 'checkbox';
       checkbox.checked = cursor.value.checked ? true: null;
 
+      // Create custome checkbox
+      let checkLabel = document.createElement('label');
+      checkLabel.className = 'check--label';
+      let customCheckbox = document.createElement('span');
+      customCheckbox.className = 'check--label-box';
+
       listItem.appendChild(checkbox);
-      listItem.appendChild(para);
+      checkLabel.appendChild(customCheckbox);
+      listItem.append(checkLabel);
+      checkLabel.appendChild(todoTextBox);
       list.appendChild(listItem);
 
-      // Put the data from the cursor inside the para
-      para.textContent = cursor.value.body;
+      // Put the data from the cursor inside the todo text area
+      todoTextBox.textContent = cursor.value.body;
 
       // Store the ID of the data item inside an attribute on the listItem, and checkbox so we know
       // which item it corresponds to. This will be useful later when we want to delete items or update items.
       listItem.setAttribute('data-todo-id', cursor.value.id);
       checkbox.setAttribute('id', cursor.value.id);
+      checkLabel.setAttribute('for', cursor.value.id);
 
       // Create a delete button and place it inside each listItem
       let deleteBtn = document.createElement('button');
