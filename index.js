@@ -1,8 +1,8 @@
 // Create needed constants
 const list = document.querySelector('ul');
-const todoInput = document.querySelector('#todo-input');
+const todoInput = document.querySelector('#td-input');
 const form = document.querySelector('form');
-const submitBtn = document.querySelector('form button');
+const submitBtn = document.querySelector('.td-btn--adding');
 
 // Create an instance of a db object for us to store the open database in
 let db;
@@ -99,44 +99,47 @@ function displayData() {
 
     // If there is still another data item to iterate through, keep running this code
     if(cursor) {
-      // Create a p to put each data item inside when displaying it
+      // Create a list-item to put each data item inside when displaying it
       // structure the HTML fragment, and append it inside the list
       let listItem = document.createElement('li');
-      listItem.className = 'list-item';
-      let todoTextBox = document.createElement('span');
-      todoTextBox.className = 'check--label-text';
+      listItem.className = 'td-list-item';
 
-      // Create a checkbox and place it before each listItem
+      // Create a checkbox and append it before each list-item
       let checkbox = document.createElement('input');
-      checkbox.className = 'checkbox';
-      checkbox.name = 'checkbox';
+      checkbox.className = 'td-checkbox';
+      checkbox.name = 'td-checkbox';
       checkbox.type = 'checkbox';
       checkbox.checked = cursor.value.checked ? true: null;
 
-      // Create custome checkbox
-      let checkLabel = document.createElement('label');
-      checkLabel.className = 'check--label';
+      // Create custom checkbox
+      // structure the HTML fragment, and append it inside the list-item
+      let checkboxLabel = document.createElement('label');
+      checkboxLabel.className = 'td-checkbox-label';
+
       let customCheckbox = document.createElement('span');
-      customCheckbox.className = 'check--label-box';
+      customCheckbox.className = 'td-checkbox-custom';
+
+      let todoText = document.createElement('span');
+      todoText.className = 'td-todo-text';
 
       listItem.appendChild(checkbox);
-      checkLabel.appendChild(customCheckbox);
-      listItem.append(checkLabel);
-      checkLabel.appendChild(todoTextBox);
+      checkboxLabel.appendChild(customCheckbox);
+      listItem.append(checkboxLabel);
+      checkboxLabel.appendChild(todoText);
       list.appendChild(listItem);
 
       // Put the data from the cursor inside the todo text area
-      todoTextBox.textContent = cursor.value.body;
+      todoText.textContent = cursor.value.body;
 
       // Store the ID of the data item inside an attribute on the listItem, and checkbox so we know
       // which item it corresponds to. This will be useful later when we want to delete items or update items.
       listItem.setAttribute('data-todo-id', cursor.value.id);
       checkbox.setAttribute('id', cursor.value.id);
-      checkLabel.setAttribute('for', cursor.value.id);
+      checkboxLabel.setAttribute('for', cursor.value.id);
 
       // Create a delete button and place it inside each listItem
       let deleteBtn = document.createElement('button');
-      deleteBtn.className = 'deleteButton';
+      deleteBtn.className = 'td-btn td-btn--deleting';
       listItem.appendChild(deleteBtn);
       deleteBtn.textContent = 'x';
 
@@ -154,6 +157,7 @@ function displayData() {
       // Again, if list item is empty, display a 'No todos stored' message
       if(!list.firstChild) {
         let listItem = document.createElement('li');
+        listItem.className = 'td-is-empty';
         listItem.textContent = 'No todos stored.';
         list.appendChild(listItem);
       }
@@ -234,6 +238,7 @@ function deleteItem(e) {
     // Again, if list item is empty, display a 'No todos stored' message
     if(!list.firstChild) {
       let listItem = document.createElement('li');
+      listItem.className = 'td-is-empty';
       listItem.textContent = 'No todos stored.';
       list.appendChild(listItem);
     }

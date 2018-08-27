@@ -23,7 +23,7 @@ body {
 	-moz-font-smoothing: antialiased;
 }
 
-.todoapp {
+.td-container {
 	background: #fff;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
@@ -32,7 +32,7 @@ body {
 
 }
 
-.todoapp h1 {
+.td-title {
 	color: rgba(175, 47, 47, 0.30);
 	font-size: 7.5rem;
 	font-weight: 100;
@@ -44,30 +44,30 @@ body {
 	text-rendering: optimizeLegibility;
 }
 
-.new-todo {
+form {
 	display: flex;
 	flex-direction: row;
 }
 
-.todoapp input::-webkit-input-placeholder {
+.td-container input::-webkit-input-placeholder {
 	color: #e6e6e6;
 	font-style: italic;
 	font-weight: 300;
 }
 
-.todoapp input::-moz-placeholder {
+.td-container input::-moz-placeholder {
 	color: #e6e6e6;
 	font-style: italic;
 	font-weight: 300;
 }
 
-.todoapp input::input-placeholder {
+.td-container input::input-placeholder {
 	color: #e6e6e6;
 	font-style: italic;
 	font-weight: 300;
 }
 
-#todo-input {
+#td-input {
 	color: inherit;
 	background: rgba(0, 0, 0, 0.003);
 	border: none;
@@ -89,7 +89,7 @@ body {
 	-moz-font-smoothing: antialiased;
 }
 
-.new-todo button {
+.td-btn--adding {
 	background: #d6d6d6;
 	border: 0;
 	box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
@@ -105,12 +105,12 @@ body {
 	-moz-font-smoothing: antialiased;
 }
 
-li {
+.td-is-empty {
 	font-size: 1.5rem;
 	padding: 15px;
 }
 
-.list {
+.td-list {
 	background-color: #fff;
 	display: flex;
 	flex-direction: column;
@@ -119,7 +119,7 @@ li {
   padding: 0;
 }
 
-.list .list-item {
+.td-list-item {
 	align-items: center;
 	border-bottom: 1px solid #ecf0f1;
 	display: flex;
@@ -134,11 +134,7 @@ li {
 	white-space: nowrap;
 }
 
-.list .list-item:last-child {
-  border: 0;
-}
-
-.checkbox {
+.td-checkbox {
 	appearance: none;
 	left: -9999px;
 	opacity: 0;
@@ -146,11 +142,11 @@ li {
 	top: -9999px;
 }
 
-.checkbox:checked + .check--label .check--label-box {
+.td-checkbox:checked + .td-checkbox-label .td-checkbox-custom {
 	background-color: #3498db;
 }
 
-.checkbox:checked + .check--label .check--label-box:after {
+.td-checkbox:checked + .td-checkbox-label .td-checkbox-custom:after {
 	border: solid #000;
 	border-width: 0 2px 2px 0;
 	content: '';
@@ -163,11 +159,11 @@ li {
 	width: 7px;
 }
 
-.checkbox:checked + .check--label .check--label-text:after {
+.td-checkbox:checked + .td-checkbox-label .td-todo-text:after {
 	width: 95%;
 }
 
-.check--label {
+.td-checkbox-label {
 	align-items: center;
 	display: flex;
 	flex-direction: row;
@@ -177,7 +173,7 @@ li {
 	margin: 0;
 }
 
-.check--label-box {
+.td-checkbox-custom {
 	align-self: center;
 	border: 2px solid #3498db;
 	border-radius: 2px;
@@ -189,7 +185,7 @@ li {
 	width: 20px;
 }
 
-.check--label-text {
+.td-todo-text {
 	align-self: center;
 	border-left: 1px solid #ecf0f1;
 	cursor: pointer;
@@ -198,7 +194,7 @@ li {
 	position: relative;
 }
 
-.check--label-text:after {
+.td-todo-text:after {
 	background-color: #000;
 	content: '';
 	display: block;
@@ -211,7 +207,7 @@ li {
 	width: 0%;
 }
 
-.deleteButton {
+.td-btn--deleting {
 	background-color: inherit;
 	border: none;
 	cursor: pointer;
@@ -225,7 +221,7 @@ li {
 	text-decoration: none;
 }
 
-.deleteButton:hover {
+.td-btn--deleting:hover {
 	color: #af5b5e;
 	font-weight: bold;
 }

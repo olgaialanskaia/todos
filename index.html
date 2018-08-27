@@ -10,27 +10,20 @@
     <script src="index.js" defer></script>
   </head>
   <body>
-    <section class="todoapp">
+    <section class='td-container'>
       <header>
-        <h1>todos</h1>
+        <div class='td-title'>todos</div>
       </header>
-      <div class="todo-box">
-        <form class="new-todo">
-            <input id="todo-input" type="text" placeholder="What needs to be done?" maxlength="40" required>
-            <button>Add</button>
+        <form>
+            <input id='td-input' type='text' placeholder='What needs to be done?' maxlength='40' required>
+            <button class='td-btn td-btn--adding'>Add</button>
         </form>
-      <div class="todos-display">
-        <ul class="list">
-
+        <ul class='td-list'>
         </ul>
-      </div>
-    </div>
-
     </section>
-
     <footer>
       <p> This is a todo app built using JavaScript, CSS, and HTML. IndexedDB is used to store data in user's browser.
-      <a href="https://github.com/olgaialanskaia/todos">TodosApp</a> on Github. Styles based on <a href="http://todomvc.com/">TodoMVC</a>.</p>
+      <a href='https://github.com/olgaialanskaia/todos'>TodosApp</a> on Github. Styles based on <a href='http://todomvc.com'>TodoMVC</a>.</p>
     </footer>
   </body>
 </html>
